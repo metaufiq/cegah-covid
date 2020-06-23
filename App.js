@@ -6,97 +6,53 @@
  * @flow strict-local
  */
 
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import FonTisto from 'react-native-vector-icons/Fontisto';
 
-export default class App extends React.Component {
-	state = {
-		data: {}
-	};
-
-	ambilData = () => {
-		fetch(
-			'https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/COVID19_Indonesia_per_Provinsi/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
-		)
-			.then((response) => response.json())
-			.then((json) => {
-				this.setState({ data: json.features });
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
-	componentDidMount() {
-		this.ambilData();
-	}
-
-	render() {
-		return (
-			<View style={{  flex: 1 }}>
-				<View
-					style={{
-						flex: 4,
-						flexDirection: 'row',
-						paddingVertical: 30,
-						justifyContent: 'center',
-						alignItems: 'center',
-						paddingRight:5,
-						borderBottomWidth:1,
-						marginBottom:2
+import ProvincesCovidComponent from './src/ProvincesCovidComponent';
+const Tab = createMaterialBottomTabNavigator();
+export default function App() {
+	return (
+		<NavigationContainer>
+			<Tab.Navigator  initialRouteName={"Negara"} backBehavior={"none"} barStyle={{ backgroundColor: 'white' }} activeColor="#D3413E" >
+				<Tab.Screen
+					name="Provinsi"
+					component={ProvincesCovidComponent}
+					options={{
+						tabBarLabel: 'Provinsi',
+						tabBarIcon: ({ color }) => <MaterialIcons name="landscape" color={color} size={25} />,
+						tabBarColor: 'red',
+						
 					}}
-				>
-					<View style={{ flex: 1 }}>
-						<Text style={{ textAlign: 'center', fontWeight:'bold' }}>Provinsi</Text>
-					</View>
-					<View style={{ flex: 1 }}>
-						<Text style={{ textAlign: 'center', fontWeight:'bold' }}>Positif</Text>
-					</View>
-					<View style={{ flex: 1 }}>
-						<Text style={{ textAlign: 'center', fontWeight:'bold' }}>Sembuh</Text>
-					</View>
-					<View style={{ flex: 1 }}>
-						<Text style={{ textAlign: 'center', fontWeight:'bold' }}>Meninggal</Text>
-					</View>
-				</View>
-				<FlatList
-					data={this.state.data}
-					renderItem={({ item }) => {
-						item = item.attributes;
-
-						if (item.Provinsi == 'Indonesia') {
-							return;
-						}
-						return (
-							<View
-								style={{
-									flex: 4,
-									flexDirection: 'row',
-									justifyContent: 'center',
-									alignItems: 'center',
-									marginBottom:2,
-									paddingRight:5
-								}}
-							>
-								<View style={{ flex: 1 }}>
-									<Text style={{ textAlign: 'center',color:'#807B7B',paddingHorizontal:5 }}>{item.Provinsi}</Text>
-								</View>
-								<View style={{ flex: 1, backgroundColor:'#FEBE00', height:'100%', minHeight:70, justifyContent:'center', alignContent:'center' }}>
-									<Text style={{ textAlign: 'center', color:'white' }}>{item.Kasus_Posi}</Text>
-								</View>
-								<View style={{ flex: 1, backgroundColor:'#5CB75C', height:'100%', minHeight:70, justifyContent:'center', alignContent:'center',marginHorizontal:1 }}>
-									<Text style={{ textAlign: 'center', color:'white' }}>{item.Kasus_Semb}</Text>
-								</View>
-								<View style={{ flex: 1, backgroundColor:'#D9534F', height:'100%', minHeight:70, justifyContent:'center', alignContent:'center' }}>
-									<Text style={{ textAlign: 'center', color:'white' }}>{item.Kasus_Meni}</Text>
-								</View>
-							</View>
-						);
-					}}
-					keyExtractor={(item) => item.attributes.FID}
+				
 				/>
-			</View>
-		);
-	}
+				<Tab.Screen
+					name="Negara"
+					component={ProvincesCovidComponent}
+					options={{
+						tabBarLabel: 'Negara',
+						tabBarIcon: ({ color }) => <FontAwesome5 name="landmark" color={color} size={20} />,
+						tabBarColor: 'red'
+					}}
+				/>
+				<Tab.Screen
+					name="Dunia"
+					component={ProvincesCovidComponent}
+					options={{
+						tabBarLabel: 'Dunia',
+						tabBarIcon: ({ color }) => <FonTisto name="world-o" color={color} size={20} />,
+						tabBarColor: 'blue'
+					}}
+				/>
+			</Tab.Navigator>
+		</NavigationContainer>
+	);
 }
 
 const styles = StyleSheet.create({
