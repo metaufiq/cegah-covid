@@ -9,18 +9,18 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 
-export default class ProvincesCovidComponent extends React.Component {
+export default class WorldCovidComponent extends React.Component {
 	state = {
 		data: []
 	};
 
 	ambilData = () => {
 		fetch(
-			'https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/COVID19_Indonesia_per_Provinsi/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
+			'https://api.kawalcorona.com/'
 		)
 			.then((response) => response.json())
 			.then((json) => {
-				this.setState({ data: json.features });
+				this.setState({ data: json });
 			})
 			.catch((error) => {
 				console.error(error);
@@ -46,7 +46,7 @@ export default class ProvincesCovidComponent extends React.Component {
 					}}
 				>
 					<View style={{ flex: 1 }}>
-						<Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Provinsi</Text>
+						<Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Negara</Text>
 					</View>
 					<View style={{ flex: 1 }}>
 						<Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Positif</Text>
@@ -79,7 +79,7 @@ export default class ProvincesCovidComponent extends React.Component {
 							>
 								<View style={{ flex: 1 }}>
 									<Text style={{ textAlign: 'center', color: '#807B7B', paddingHorizontal: 5 }}>
-										{item.Provinsi}
+										{item.Country_Region}
 									</Text>
 								</View>
 								<View
@@ -92,7 +92,7 @@ export default class ProvincesCovidComponent extends React.Component {
 										alignContent: 'center'
 									}}
 								>
-									<Text style={{ textAlign: 'center', color: 'white' }}>{item.Kasus_Posi}</Text>
+									<Text style={{ textAlign: 'center', color: 'white' }}>{item.Confirmed}</Text>
 								</View>
 								<View
 									style={{
@@ -105,7 +105,7 @@ export default class ProvincesCovidComponent extends React.Component {
 										marginHorizontal: 1
 									}}
 								>
-									<Text style={{ textAlign: 'center', color: 'white' }}>{item.Kasus_Semb}</Text>
+									<Text style={{ textAlign: 'center', color: 'white' }}>{item.Recovered}</Text>
 								</View>
 								<View
 									style={{
@@ -117,7 +117,7 @@ export default class ProvincesCovidComponent extends React.Component {
 										alignContent: 'center'
 									}}
 								>
-									<Text style={{ textAlign: 'center', color: 'white' }}>{item.Kasus_Meni}</Text>
+									<Text style={{ textAlign: 'center', color: 'white' }}>{item.Deaths}</Text>
 								</View>
 							</View>
 						);

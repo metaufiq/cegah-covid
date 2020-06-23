@@ -16,6 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FonTisto from 'react-native-vector-icons/Fontisto';
 
 import ProvincesCovidComponent from './src/ProvincesCovidComponent';
+import WorldCovidComponent from './src/WorldCovidComponent';
 const Tab = createMaterialBottomTabNavigator();
 export default function App() {
 	return (
@@ -43,7 +44,7 @@ export default function App() {
 				/>
 				<Tab.Screen
 					name="Dunia"
-					component={ProvincesCovidComponent}
+					component={WorldCovidComponent}
 					options={{
 						tabBarLabel: 'Dunia',
 						tabBarIcon: ({ color }) => <FonTisto name="world-o" color={color} size={20} />,
