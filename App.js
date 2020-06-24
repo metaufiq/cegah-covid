@@ -13,44 +13,51 @@ import { StyleSheet } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FonTisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import NegaraCovidComponent from './src/NegaraCovidComponent';
+import AboutComponent from './src/AboutComponent';
+import CountryCovidComponent from './src/CountryCovidComponent';
 import ProvincesCovidComponent from './src/ProvincesCovidComponent';
 import WorldCovidComponent from './src/WorldCovidComponent';
 
 const Tab = createMaterialBottomTabNavigator();
 export default function App() {
-
-	
 	return (
 		<NavigationContainer>
-			<Tab.Navigator  initialRouteName={"Negara"} backBehavior={"none"} barStyle={{ backgroundColor: 'white' }} activeColor="#D3413E" >
+			<Tab.Navigator
+				initialRouteName={'Country'}
+				backBehavior={'none'}
+				barStyle={{ backgroundColor: 'white' }}
+				activeColor="#D3413E"
+			>
 				<Tab.Screen
-					name="Provinsi"
+					name="Provinces"
 					component={ProvincesCovidComponent}
 					options={{
 						tabBarLabel: 'Provinsi',
-						tabBarIcon: ({ color }) => <MaterialIcons name="landscape" color={color} size={25} />,
-						tabBarColor: 'red',
-						
+						tabBarIcon: ({ color }) => <MaterialIcons name="landscape" color={color} size={25} />
 					}}
-				
 				/>
 				<Tab.Screen
-					name="Negara"
-					component={NegaraCovidComponent}
+					name="Country"
+					component={CountryCovidComponent}
 					options={{
 						tabBarLabel: 'Negara',
-						tabBarIcon: ({ color }) => <FontAwesome5 name="landmark" color={color} size={20} />,
-						tabBarColor: 'red'
+						tabBarIcon: ({ color }) => <FontAwesome5 name="landmark" color={color} size={20} />
 					}}
 				/>
 				<Tab.Screen
-					name="Dunia"
+					name="World"
 					component={WorldCovidComponent}
 					options={{
 						tabBarLabel: 'Dunia',
-						tabBarIcon: ({ color }) => <FonTisto name="world-o" color={color} size={20} />,
-						tabBarColor: 'blue'
+						tabBarIcon: ({ color }) => <FonTisto name="world-o" color={color} size={20} />
+					}}
+				/>
+				<Tab.Screen
+					name="About"
+					component={AboutComponent}
+					options={{
+						tabBarLabel: 'Tentang',
+						tabBarIcon: ({ color }) => <FontAwesome5 name="question-circle" color={color} size={20} />
 					}}
 				/>
 			</Tab.Navigator>

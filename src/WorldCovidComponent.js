@@ -48,7 +48,7 @@ export default class WorldCovidComponent extends React.Component {
 						}}
 					>
 						<View style={{ flex: 1 }}>
-							<Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Negara</Text>
+							<Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Country</Text>
 						</View>
 						<View style={{ flex: 1 }}>
 							<Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Positif</Text>

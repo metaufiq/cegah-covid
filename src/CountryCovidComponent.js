@@ -10,7 +10,7 @@ import React from 'react';
 import { View, Image, Linking } from 'react-native';
 import { Card, Text, Button } from 'react-native-paper';
 
-export default class NegaraCovidComponent extends React.Component {
+export default class CountryCovidComponent extends React.Component {
 	state = {
 		data: false
 	};
