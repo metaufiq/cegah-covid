@@ -7,7 +7,8 @@
  */
 
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
+import { Text } from 'react-native-paper';
 
 export default class ProvincesCovidComponent extends React.Component {
 	state = {
@@ -32,7 +33,7 @@ export default class ProvincesCovidComponent extends React.Component {
 
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
+			<View style={{ flex: 1,backgroundColor:'white' }}>
 				<View
 					style={{
 						flex: 4,
@@ -41,7 +42,8 @@ export default class ProvincesCovidComponent extends React.Component {
 						justifyContent: 'center',
 						alignItems: 'center',
 						paddingRight: 5,
-						borderBottomWidth: 1,
+						elevation: 1,
+						borderBottomColor: '#807B7B',
 						marginBottom: 2
 					}}
 				>
