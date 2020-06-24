@@ -33,7 +33,7 @@ export default class WorldCovidComponent extends React.Component {
 	render() {
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
-				<View style={{ display: this.state.isLoadData ? 'flex' : 'none' }}>
+				<View style={{ display: this.state.isLoadData ? 'flex' : 'none',flex:1}}>
 					<View
 						style={{
 							flex: 4,
