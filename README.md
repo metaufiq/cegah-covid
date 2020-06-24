@@ -1,2 +1,2 @@
 # cegah-covid
-aplikasi penyebaran covid 19 di Indonesia
+aplikasi penyebaran covid 19
