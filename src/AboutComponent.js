@@ -41,9 +41,9 @@ export default class AboutComponent extends React.Component {
 				console.log("Don't know how to open URI: " + url);
 			}
 		});
-    };
-    
-    openMyLinkedIn = () => {
+	};
+
+	openMyLinkedIn = () => {
 		let url = 'https://www.linkedin.com/in/mtaufiqulsadi/';
 		Linking.canOpenURL(url).then((supported) => {
 			if (supported) {
@@ -56,10 +56,21 @@ export default class AboutComponent extends React.Component {
 
 	render() {
 		return (
-			<View style={{ flex: 1, backgroundColor: 'white', justifyContent:'center' }}>
+			<View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center' }}>
+				<View style={{ padding: 40 }}>
+					<Text style={{ color: '#807B7B', textAlign: 'center' }}>Versi</Text>
+					<View style={{ marginTop: 10 }}>
+						<Text style={{ color: '#807B7B', textAlign: 'center' }}>0.5.0-beta</Text>
+					</View>
+				</View>
 				<View style={{ padding: 20 }}>
-					<Text style={{ color: '#807B7B',textAlign:'center' }}>Versi</Text>
-					<Text style={{ color: '#807B7B',textAlign:'center' }}>0.5.0-beta</Text>
+					<Text style={{ color: '#807B7B', textAlign: 'center' }}>Sumber Data</Text>
+					<View style={{ marginTop: 10 }}>
+						<Text style={{ color: '#807B7B', textAlign: 'center', marginBottom: 10 }}>
+							https://gis-kawalcovid19.hub.arcgis.com/datasets/kasus-covid19-indonesia/geoservice
+						</Text>
+						<Text style={{ color: '#807B7B', textAlign: 'center' }}>https://kawalcorona.com/api/</Text>
+					</View>
 				</View>
 
 				<View style={{ padding: 20 }}>
@@ -74,7 +85,7 @@ export default class AboutComponent extends React.Component {
 							LinkedIn Saya
 						</Button>
 					</View>
-					<View >
+					<View>
 						<Button
 							icon="email"
 							mode="contained"
