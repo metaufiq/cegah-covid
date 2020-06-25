@@ -9,33 +9,28 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import { Text, ActivityIndicator } from 'react-native-paper';
+import { connect } from 'react-redux';
+import coronaDataAction from '../actions/coronaDataAction';
 
-export default class ProvincesCovidComponent extends React.Component {
+class ProvincesCovidComponent extends React.Component {
 	state = {
 		data: [],
 		isLoadData: false
 	};
 
-	ambilData = () => {
-		fetch(
-			'https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/COVID19_Indonesia_per_Provinsi/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
-		)
-			.then((response) => response.json())
-			.then((json) => {
-				this.setState({ data: json.features, isLoadData: true });
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
 	componentDidMount() {
-		this.ambilData();
+
+
 	}
 
+	componentDidUpdate() {
+
+	}
 	render() {
+
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
-				<View style={{ display: this.state.isLoadData ? 'flex' : 'none',flex:1 }}>
+				<View style={{ display: this.props.state.coronaDataReducer.provincesData != undefined ? 'flex' : 'none', flex: 1 }}>
 					<View
 						style={{
 							flex: 4,
@@ -63,7 +58,7 @@ export default class ProvincesCovidComponent extends React.Component {
 						</View>
 					</View>
 					<FlatList
-						data={this.state.data}
+						data={this.props.state.coronaDataReducer.provincesData}
 						renderItem={({ item }) => {
 							item = item.attributes;
 
@@ -129,10 +124,20 @@ export default class ProvincesCovidComponent extends React.Component {
 						keyExtractor={(item) => item.attributes.FID}
 					/>
 				</View>
-				<View style={{ display: this.state.isLoadData ? 'none' : 'flex', justifyContent:'center',alignContent:'center',flex:1 }}>
+				<View style={{ display: this.props.state.coronaDataReducer.provincesData != undefined ? 'none' : 'flex', justifyContent: 'center', alignContent: 'center', flex: 1 }}>
 					<ActivityIndicator size="large" color="#D9534F" />
 				</View>
 			</View>
 		);
 	}
 }
+function mapStateToProps(state) {
+	return {
+		state: state
+	};
+}
+
+const mapDispatchToProps = {
+	...coronaDataAction
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProvincesCovidComponent);

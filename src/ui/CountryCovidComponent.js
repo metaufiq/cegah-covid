@@ -9,25 +9,19 @@
 import React from 'react';
 import { View, Image, Linking } from 'react-native';
 import { Card, Text, Button } from 'react-native-paper';
+import coronaDataAction from '../actions/coronaDataAction';
+import { connect } from 'react-redux';
 
-export default class CountryCovidComponent extends React.Component {
+class CountryCovidComponent extends React.Component {
 	state = {
 		data: false
 	};
 
-	ambilData = () => {
-		fetch('https://api.kawalcorona.com/indonesia')
-			.then((response) => response.json())
-			.then((json) => {
-				this.setState({ data: json[0] });
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+	ambilData = async () => {
+		await this.props.getCoronaData();
+
 	};
-	componentDidMount() {
-		this.ambilData();
-	}
+
 
 	openBNPBWebsite = () => {
 		let url = 'https://bnpb.go.id/berita';
@@ -50,8 +44,12 @@ export default class CountryCovidComponent extends React.Component {
 			}
 		});
 	};
+	componentDidMount() {
+		this.ambilData();
 
+	}
 	render() {
+		
 		return (
 			<View
 				style={{
@@ -60,18 +58,18 @@ export default class CountryCovidComponent extends React.Component {
 					backgroundColor: 'white'
 				}}
 			>
-				<View style={{ marginBottom: 20, flex: 0.8, backgroundColor: '#D9534F',paddingTop:10 }}>
-					<Text style={{ textAlign: 'center', fontSize: 40, color:'white' }}>Kasus Covid-19 Indonesia</Text>
+				<View style={{ marginBottom: 20, flex: 0.8, backgroundColor: '#D9534F', paddingTop: 10 }}>
+					<Text style={{ textAlign: 'center', fontSize: 40, color: 'white' }}>Kasus Covid-19 Indonesia</Text>
 				</View>
 
-				<View style={{ flex: 1, padding: 10,marginTop:-180 }}>
+				<View style={{ flex: 1, padding: 10, marginTop: -180 }}>
 					<Card elevation={3}>
 						<View style={{ padding: 10 }}>
 							<Card.Content>
 								<View style={{ justifyContent: 'center', alignContent: 'center', paddingBottom: 10 }}>
 									<Text style={{ textAlign: 'center', fontSize: 30 }}>Positif</Text>
 									<Text style={{ textAlign: 'center', fontSize: 40, color: '#FEBE00' }}>
-										{this.state.data ? this.state.data.positif : '_'}
+										{this.props.state.coronaDataReducer.indonesiaData?.positif ? this.props.state.coronaDataReducer.indonesiaData?.positif : '_'}
 									</Text>
 								</View>
 							</Card.Content>
@@ -80,7 +78,7 @@ export default class CountryCovidComponent extends React.Component {
 									<View style={{ justifyContent: 'center', alignContent: 'center' }}>
 										<Text style={{ textAlign: 'center', fontSize: 30 }}>Sembuh</Text>
 										<Text style={{ textAlign: 'center', fontSize: 40, color: '#5CB75C' }}>
-											{this.state.data.sembuh ? this.state.data.sembuh : '_'}
+											{this.props.state.coronaDataReducer.indonesiaData?.sembuh ? this.props.state.coronaDataReducer.indonesiaData?.sembuh : '_'}
 										</Text>
 									</View>
 								</Card.Content>
@@ -88,7 +86,7 @@ export default class CountryCovidComponent extends React.Component {
 									<View style={{ justifyContent: 'center', alignContent: 'center' }}>
 										<Text style={{ textAlign: 'center', fontSize: 30 }}>Meninggal</Text>
 										<Text style={{ textAlign: 'center', fontSize: 40, color: '#D9534F' }}>
-											{this.state.data.meninggal ? this.state.data.meninggal : '_'}
+											{this.props.state.coronaDataReducer.indonesiaData?.meninggal ? this.props.state.coronaDataReducer.indonesiaData?.meninggal : '_'}
 										</Text>
 									</View>
 								</Card.Content>
@@ -125,3 +123,14 @@ export default class CountryCovidComponent extends React.Component {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		state: state
+	};
+}
+
+const mapDispatchToProps = {
+	...coronaDataAction
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CountryCovidComponent);

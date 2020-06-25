@@ -9,27 +9,17 @@
 import React from 'react';
 import { View, Linking } from 'react-native';
 import { Text, Button } from 'react-native-paper';
+import { connect } from 'react-redux';
+import coronaDataAction from '../actions/coronaDataAction';
 
-export default class AboutComponent extends React.Component {
+class AboutComponent extends React.Component {
 	state = {
 		data: [],
 		isLoadData: false
 	};
 
-	ambilData = () => {
-		fetch(
-			'https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/COVID19_Indonesia_per_Provinsi/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
-		)
-			.then((response) => response.json())
-			.then((json) => {
-				this.setState({ data: json.features, isLoadData: true });
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
 	componentDidMount() {
-		this.ambilData();
+
 	}
 
 	contactMeGmail = () => {
@@ -101,3 +91,15 @@ export default class AboutComponent extends React.Component {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	// console.log(state);
+	return {
+		state: state
+	};
+}
+
+const mapDispatchToProps = {
+	...coronaDataAction
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AboutComponent);

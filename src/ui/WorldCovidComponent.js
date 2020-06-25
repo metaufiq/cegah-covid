@@ -9,31 +9,31 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import { Text, ActivityIndicator } from 'react-native-paper';
+import { connect } from 'react-redux';
+import coronaDataAction from '../actions/coronaDataAction';
 
-export default class WorldCovidComponent extends React.Component {
+class WorldCovidComponent extends React.Component {
 	state = {
 		data: [],
 		isLoadData: false
 	};
 
-	ambilData = () => {
-		fetch('https://api.kawalcorona.com/')
-			.then((response) => response.json())
-			.then((json) => {
-				this.setState({ data: json,isLoadData: true });
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
 	componentDidMount() {
-		this.ambilData();
+
+
+
+	}
+
+	componentDidUpdate() {
+		if (this.props.state.coronaDataReducer.worldData) {
+			this.setState({ isLoadData: true })
+		}
 	}
 
 	render() {
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
-				<View style={{ display: this.state.isLoadData ? 'flex' : 'none',flex:1}}>
+				<View style={{ display: this.props.state.coronaDataReducer.worldData != undefined? 'flex' : 'none', flex: 1 }}>
 					<View
 						style={{
 							flex: 4,
@@ -61,13 +61,10 @@ export default class WorldCovidComponent extends React.Component {
 						</View>
 					</View>
 					<FlatList
-						data={this.state.data}
+						data={this.props.state.coronaDataReducer.worldData}
 						renderItem={({ item }) => {
 							item = item.attributes;
 
-							if (item.Provinsi == 'Indonesia') {
-								return;
-							}
 							return (
 								<View
 									style={{
@@ -130,7 +127,7 @@ export default class WorldCovidComponent extends React.Component {
 
 				<View
 					style={{
-						display: this.state.isLoadData ? 'none' : 'flex',
+						display: this.props.state.coronaDataReducer.worldData != undefined ? 'none' : 'flex',
 						justifyContent: 'center',
 						alignContent: 'center',
 						flex: 1
@@ -142,3 +139,14 @@ export default class WorldCovidComponent extends React.Component {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		state: state
+	};
+}
+
+const mapDispatchToProps = {
+	...coronaDataAction
+};
+export default connect(mapStateToProps, mapDispatchToProps)(WorldCovidComponent);
