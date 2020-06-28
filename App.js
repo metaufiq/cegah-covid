@@ -14,9 +14,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FonTisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AboutComponent from './src/ui/AboutComponent';
-import CountryCovidComponent from './src/ui/CountryCovidComponent';
-import ProvincesCovidComponent from './src/ui/ProvincesCovidComponent';
-import WorldCovidComponent from './src/ui/WorldCovidComponent';
+import IndonesiaCovidComponent from './src/ui/IndonesiaCovidComponent';
+import ProvincesCovidComponent from './src/ui/ProvincesCovid/ProvincesCovidComponent';
+import WorldCovidComponent from './src/ui/WorldCovid/WorldCovidComponent';
 
 const Tab = createMaterialBottomTabNavigator();
 export default function App() {
@@ -38,7 +38,7 @@ export default function App() {
 				/>
 				<Tab.Screen
 					name="Country"
-					component={CountryCovidComponent}
+					component={IndonesiaCovidComponent}
 					options={{
 						tabBarLabel: 'Negara',
 						tabBarIcon: ({ color }) => <FontAwesome5 name="landmark" color={color} size={20} />

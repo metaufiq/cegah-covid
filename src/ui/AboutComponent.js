@@ -10,7 +10,7 @@ import React from 'react';
 import { View, Linking } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { connect } from 'react-redux';
-import coronaDataAction from '../actions/coronaDataAction';
+import coronaDataAction from '../actions/connectionAction';
 
 class AboutComponent extends React.Component {
 	state = {
@@ -93,7 +93,6 @@ class AboutComponent extends React.Component {
 }
 
 function mapStateToProps(state) {
-	// console.log(state);
 	return {
 		state: state
 	};

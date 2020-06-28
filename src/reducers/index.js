@@ -1,4 +1,5 @@
-import coronaDataReducer from './coronaDataReducer';
+
+import connectionReducer from './connectionReducer';
 export default {
-	coronaDataReducer
+	connectionReducer
 };
