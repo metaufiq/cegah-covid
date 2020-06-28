@@ -3,7 +3,8 @@
 CegahCovid merupakan sebuah aplikasi untuk mengetahui jumlah serta penyebaran Covid-19 di Indonesia dan Dunia.
 
 
-# Install Aplikasi
+# Unduh Aplikasi
+Anda dapat mengunduh CegahCovid pada laman [*Release*](https://github.com/metaufiq/cegah-covid/releases)
 
 # Menjalankan Project (Developer)
 
