@@ -23,10 +23,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Tab.Navigator
-				initialRouteName={'Country'}
+				initialRouteName={'Indonesia'}
 				backBehavior={'none'}
 				barStyle={{ backgroundColor: 'white' }}
 				activeColor="#D3413E"
+				shifting={false}
 			>
 				<Tab.Screen
 					name="Provinces"
@@ -37,10 +38,10 @@ export default function App() {
 					}}
 				/>
 				<Tab.Screen
-					name="Country"
+					name="Indonesia"
 					component={IndonesiaCovidComponent}
 					options={{
-						tabBarLabel: 'Negara',
+						tabBarLabel: 'Indonesia',
 						tabBarIcon: ({ color }) => <FontAwesome5 name="landmark" color={color} size={20} />
 					}}
 				/>
